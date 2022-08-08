@@ -1,0 +1,98 @@
+body{
+    background: whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#login-mainbox{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    height: 1000px;
+}
+
+@media screen and (min-width: 600px) {
+    #logo {
+      display: none;
+    }
+  }
+
+#signin-form {
+    /* background: linear-gradient(rgba(40, 20, 84, 0.728)); */
+    background: rgb(70,65,167);
+    background: rgb(104,91,142);
+    background: linear-gradient(302deg, rgba(104,91,142,1) 0%, rgba(40,20,84,0.9094231442577031) 100%);
+    padding: 8rem;
+    border-radius: 8px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+#username {
+    margin-top: 20px;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    font-family: 'Ubuntu', sans-serif;
+    width: 225px;
+    padding: 5px 9px;
+    border-radius: 5px;
+    border-color: transparent;
+    color: rgb(40, 39, 39);
+}
+
+#inputPassword {
+    margin-bottom: 2rem;
+    width: 225px;
+    padding: 5px 9px;
+    font-size: 0.95rem;
+    color: rgb(40, 39, 39);
+    font-family: 'Ubuntu', sans-serif;
+    border-radius: 5px;
+    border-color: transparent;
+}
+
+#signuplink {
+    margin-left: 1.1rem;
+}
+
+#loginbtn {
+    padding: 6px 35px;
+    margin-right: 30px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    font-family: 'Ubuntu', sans-serif;
+    background-color: #a021ef;
+    border-style: none;
+}
+
+#loginbtn:hover {
+    border-color:rgb(255, 255, 255);
+    border-width: 6px;
+    background: #a021ef;
+    color: whitesmoke;
+}
+
+#loginbtn:active {   
+    transform: translateY(1px);
+    background: #a021ef;
+    color: whitesmoke;
+}
+
+#signuplink {
+    text-decoration: none;
+    font-family: 'Ubuntu', sans-serif;
+    color: #cd8df4;
+    font-size: 0.95em;
+}
+
+#signuplink:hover {
+    border-color: azure;
+}
+
+/* #userInputs{
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+} */
