@@ -9,6 +9,7 @@ const userController = require('./userController')
 const { appendFile } = require('fs');
 
 app.use(express.json());
+app.use(express.urlencoded({extended:false}));
 
 // const algoRouter = express.Router();
 // app.use('/algos', algoRouter);
@@ -19,8 +20,8 @@ app.get('/', (req, res) => {
 
 // app.get('/server_getalgos', (req, res) => res.status(200).send('HELLO'));
 
-app.get('/server_getalgos', algoController.getAlgos,
-  (req, res) => res.status(200).json(res.locals.allAlgos)
+app.get('/server_getalgos', algoController.getAlgos, algoController.filterAlgos,
+  (req, res) => res.status(200).json(res.locals.filteredAlgos)
 );
 
 app.post('/server_postalgo', algoController.postAlgo, 
