@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-const myURI = 'mongodb+srv://ilijacodes:Codesmith69!@cluster0.yobqo.mongodb.net/?retryWrites=true&w=majority'
+const myURI = ''
 const models = {};
 
 const AlgoSchema = new Schema({
