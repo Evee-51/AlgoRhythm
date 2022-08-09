@@ -1,0 +1,96 @@
+body{
+  background: whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#signup-mainbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1500px;
+    height: 1000px;
+}
+
+#signup-form {
+  background: rgb(70,65,167);
+  background: rgb(104,91,142);
+  background: linear-gradient(302deg, rgba(104,91,142,1) 0%, rgba(40,20,84,0.9094231442577031) 100%);
+  padding: 8rem;
+  border-radius: 8px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  display: flex;
+  align-items: center;
+  flex-direction: center;
+}
+
+#form-left{
+  align-items: center;
+}
+
+#logo {
+  margin-right: 120px;
+  width: 250px;
+}
+
+#signup-header{
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 2rem;
+  color: whitesmoke;
+  margin-bottom: 40px;
+}
+
+#member {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1rem;
+  color: whitesmoke;
+}
+
+#text{
+  margin-top: 20px;
+}
+
+
+#signupinput {
+  margin-bottom: 1.5rem;
+  width: 225px;
+  padding: 5px 9px;
+  font-size: 0.95rem;
+  color: rgb(40, 39, 39);
+  font-family: 'Ubuntu', sans-serif;
+  border-radius: 5px;
+  border-color: transparent;
+}
+
+
+#signupbtn {
+  padding: 6px 98px;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  font-family: 'Ubuntu', sans-serif;
+  background-color:  #a021ef;
+  border-style: none;
+}
+
+#signupbtn:hover {
+  border-color:rgb(255, 255, 255);
+  border-width: 6px;
+  background: #a021ef;
+  color: whitesmoke;
+}
+
+#signupbtn:active {   
+  transform: translateY(1px);
+  background: #a021ef;
+  color: whitesmoke;
+}
+
+#backtologin {
+    text-decoration: none;
+    font-family: 'Ubuntu', sans-serif;
+    color:  #cd8df4;
+    font-size: 0.95em;
+    margin-left: 17px;
+}
+
