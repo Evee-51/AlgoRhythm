@@ -18,25 +18,27 @@ app.get('/', (req, res) => {
     return res.status(200).sendFile(path.resolve(__dirname, '../public/index.html'));
 })
 
+app.use('/bundle.js', express.static('../dist/bundle.js'));
+
 // app.get('/server_getalgos', (req, res) => res.status(200).send('HELLO'));
 
-app.get('/server_getalgos', algoController.getAlgos, algoController.filterAlgos,
+app.get('/api/getalgos', algoController.getAlgos, algoController.filterAlgos,
   (req, res) => res.status(200).json(res.locals.filteredAlgos)
 );
 
-app.post('/server_postalgo', algoController.postAlgo, 
+app.post('/api/postalgo', algoController.postAlgo, 
   (req, res) => res.status(200).json(res.locals.newAlgo)
 );
 
-app.get('/server_getalgos/:id', algoController.findAlgo,
+app.get('/api/getalgos/:id', algoController.findAlgo,
   (req, res) => res.status(200).json(res.locals.foundAlgo)
 );  
 
-app.post('/server_signup', userController.signup,
+app.post('/api/login', userController.signup,
   (req, res) => res.status(200).json('Signup complete!')
 );
 
-app.post('/server_login', userController.verifyUser,
+app.post('/api/signup', userController.verifyUser,
   (req, res) => res.status(200).json('Login Attempted!')
 );
 

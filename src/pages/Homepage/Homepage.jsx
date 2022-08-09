@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import SearchBar from '../../components/SearchBar/SearchBar'
+import SearchBar from '../../components/SearchBar/SearchBar.jsx'
 import CompanyAlgo from '../../components/CompanyAlgo/CompanyAlgo.jsx'
 import './Homepage.css'
 

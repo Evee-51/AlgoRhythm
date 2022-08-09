@@ -12,30 +12,34 @@ const useInput = (initial) => {
 
 export default function SignupBox (props) {
   const [username, usernameOnChange] = useInput('')
-  const [inputPassword, passwordOnChange] = useInput('')
-  const [firstname, firstNameOnChange] = useInput('')
-  const [lastname, lastNameOnChange] = useInput('')
+  const [password, passwordOnChange] = useInput('')
+  const [first, firstOnChange] = useInput('')
+  const [last, lastOnChange] = useInput('')
 
-  const saveUser = () => {
-    console.log('saveuser')
+  const saveUser = (event) => {
+    event.preventDefault();
     const body = {
       username,
-      inputPassword,
-      firstname,
-      lastname
+      password,
+      first,
+      last
     }
+    console.log('BODY ', body);
+    console.log('Console log AFTER body.');
 
-    fetch('/api/users', {
-      method: 'PUT',
+    fetch('http://localhost:3333/api/signup', {
+      method: 'POST',
+      mode: 'cors',
       body: JSON.stringify(body),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Headers': '*'
       }
     })
       .then((data) => {
-        console.log(data)
+        console.log('RECEIVED DATA: ', data)
       })
-      .catch((error) => console.log(error))
+      .catch((error) => console.log('FETCH ERROR: ', error))
   }
 
   return (
@@ -49,14 +53,14 @@ export default function SignupBox (props) {
             <input
               type='text'
               placeholder='First Name'
-              onChange={firstNameOnChange}
+              onChange={firstOnChange}
               id="signupinput"
               className= 'inputfield'
             /><br/>
             <input
               type='text'
               placeholder='Last Name'
-              onChange={lastNameOnChange}
+              onChange={lastOnChange}
               id="signupinput"
               className= 'inputfield'
             /><br/>

@@ -50,7 +50,7 @@ export default function LoginBox () {
 
   return (
     <div id='login-mainbox'>
-      <img class='logo' src={img}></img>
+      <img className='logo' src={img}></img>
         <br />
         <div id ='signin-form'>
           <form id ='userInputs'>
@@ -59,7 +59,7 @@ export default function LoginBox () {
             {/* <input type='submit' value="Log In" id='loginbtn'/> */}
             <button id='loginbtn' onClick={signIn}>Log In</button>
             {/* <input id="signupinput" type='submit' value='signin' onClick={signIn} /> */}
-            <a href='./signup' id='signuplink'>Sign up</a>
+            <a href='/signup' id='signuplink'>Sign up</a>
             {/* <button id='sign-up'>Sign Up</button> */}
           </form>
         </div>

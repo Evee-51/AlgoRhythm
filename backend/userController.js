@@ -4,6 +4,7 @@ const userController = {};
 
 // Get request for all algo problems 
 userController.signup = (req, res, next) => {  
+    console.log('Attempted signup with: ', req.body);
     const {username, password, first, last} = req.body;
     models.postUser(username, password, first, last)
     .then(data => {

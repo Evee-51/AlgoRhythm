@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
+  mode: 'production',
   entry: './src/index.js',
   output: {
     path: path.join(__dirname, '/dist'),
@@ -9,13 +10,13 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './public/index.html',
       inject: false
     })
   ],
   devServer: {
     proxy: {
-      '/api': 'http://localhost:3000'
+      '/api': 'http://localhost:3333'
     },
     port: 8080,
     historyApiFallback: true
@@ -28,7 +29,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react','@babel/plugin-syntax-top-level-await']
+            presets: ['@babel/preset-env', '@babel/preset-react']
           }
         }
       },
@@ -46,7 +47,7 @@ module.exports = {
       }
     ]
   },
-  experiments: {
-    topLevelAwait: true
-  }
+  // experiments: {
+  //   topLevelAwait: true
+  // }
 }
