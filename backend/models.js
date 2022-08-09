@@ -2,29 +2,43 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-const myURI = ''
+const myURI = 'mongodb+srv://ilijacodes:Codesmith69!@cluster0.yobqo.mongodb.net/?retryWrites=true&w=majority'
 const models = {};
+
+mongoose.connect(myURI, function(err) {
+    if (err) {
+        console.log(err);
+    }
+});
+
+mongoose.connection.once('open', () => {
+    console.log('Connected to database!');
+})
+
+const URI = process.env.MONGO_URI || myURI;
 
 const AlgoSchema = new Schema({
     company: String,
     question: String,
     language: String,
-    date: Date,
-    creator: ObjectId
+    creator: String,
+    date: {type: Date, default: Date.now()}
 });
 
 const UserSchema = new Schema({
     username: String,
-    password: String
+    password: String,
+    first: String,
+    last: String
 })
 
 const algoModel = mongoose.model('Algo', AlgoSchema);
 const userModel = mongoose.model('User', UserSchema);
 
 //Post algo
-models.postAlgo = function ({company, question, language, creator}) {
-    new Promise((resolve, reject) => {
-        algoModel.create({company, question, language, date: Date.now(), creator}, (err, data) => {
+models.postAlgo = function (company, question, language, creator) {
+    return new Promise((resolve, reject) => {
+        algoModel.create({company, question, language, creator}, (err, data) => {
             if(err) {
                 console.log(err);
                 reject(err);
@@ -36,8 +50,8 @@ models.postAlgo = function ({company, question, language, creator}) {
 }
 
 //Get specific algo
-models.getAlgo = function (id) {
-    new Promise((resolve, reject) => {
+models.findAlgo = function (id) {
+    return new Promise((resolve, reject) => {
         algoModel.findOne({_id: id}, (err, algo) => {
             if(err) {
                 reject(err);
@@ -50,7 +64,7 @@ models.getAlgo = function (id) {
 
 //Get a set of algos
 models.getAlgoSet = function (req, res, next) {
-    new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         algoModel.find({}, (err, algos) => {
             if(err) {
                 console.log(err);
@@ -63,9 +77,9 @@ models.getAlgoSet = function (req, res, next) {
 }
 
 //Post user
-models.postUser = function ({username, password}) {
-    new Promise((resolve, reject) => {
-        userModel.create({username, password}, (err, data) => {
+models.postUser = function (username, password, first, last) {
+    return new Promise((resolve, reject) => {
+        userModel.create({username, password, first, last}, (err, data) => {
             if(err) {
                 console.log(err);
                 reject(err);
@@ -77,8 +91,8 @@ models.postUser = function ({username, password}) {
 }
 
 //Verify login
-models.verifyLogin = function ({username, password}) {
-    new Promise((resolve, reject) => {
+models.verifyLogin = function (username, password) {
+    return new Promise((resolve, reject) => {
         userModel.findOne({username, password}, (err, data) => {
             if(err) {
                 console.log(err);
@@ -91,4 +105,4 @@ models.verifyLogin = function ({username, password}) {
     })
 }
 
-export default models;
+module.exports = models;

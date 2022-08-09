@@ -1,30 +1,42 @@
-console.log('hello');
-
 const path = require('path');
 const express = require('express');
 const app = express();
 
 const PORT = 3333;
 
-const algoController = require('./controllers.js');
+const algoController = require('./algoController');
+const userController = require('./userController')
 const { appendFile } = require('fs');
-
 
 app.use(express.json());
 
-const algoRouter = express.Router();
-app.use('/algos', algoRouter);
+// const algoRouter = express.Router();
+// app.use('/algos', algoRouter);
 
 app.get('/', (req, res) => {
     return res.status(200).sendFile(path.resolve(__dirname, '../public/index.html'));
 })
 
-algoRouter.get('/', algoController.getAlgos,
+// app.get('/server_getalgos', (req, res) => res.status(200).send('HELLO'));
+
+app.get('/server_getalgos', algoController.getAlgos,
   (req, res) => res.status(200).json(res.locals.allAlgos)
 );
 
-algoRouter.post('/', algoController.postAlgo, 
+app.post('/server_postalgo', algoController.postAlgo, 
   (req, res) => res.status(200).json(res.locals.newAlgo)
+);
+
+app.get('/server_getalgos/:id', algoController.findAlgo,
+  (req, res) => res.status(200).json(res.locals.foundAlgo)
+);  
+
+app.post('/server_signup', userController.signup,
+  (req, res) => res.status(200).json('Signup complete!')
+);
+
+app.post('/server_login', userController.verifyUser,
+  (req, res) => res.status(200).json('Login Attempted!')
 );
 
 // Global error handler 
