@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './CompanyAlgo.css'
+import img from '../../img/Algorhythm-Logo1.png'
 
 
 export default function CompanyAlgo () {
@@ -43,16 +44,17 @@ export default function CompanyAlgo () {
 
 
   return (
-    <div>
-        <div>
+    <div className='companyAlgoPage'>
+        <img src={img} id='logo'/>
+        <div id='form'>
             <form onSubmit={()=> {
                 post();
             }}>
             <input id='companyBox' placeholder='Company Name'></input>
+            <input id='language' placeholder='Language'></input><br />
             <input id='algoBox' placeholder='Algorhythm'></input>
-            <input id='language' placeholder='Language'></input>
-            {/* <input id='creator' placeholder='Algorhythm'></input> */}
-            <button type="submit">New Post</button>
+            {/* <input id='creator' placeholder='Algorhythm'></input> */}<br />
+            <button className='button-85' type="submit">New Post</button>
             </form>
         </div>
         <div>
