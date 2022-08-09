@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import SearchBar from '../../components/SearchBar/SearchBar'
-// import Navbar from '../../components/Navbar/Navbar.jsx'
+import CompanyAlgo from '../../components/CompanyAlgo/CompanyAlgo.jsx'
 import './Homepage.css'
 
 export default function Homepage () {
@@ -13,9 +13,10 @@ export default function Homepage () {
   return (
     <div id='home'>
       <div>
-        <SearchBar/>
+        {/* <SearchBar/> */}
       </div>
       <div id='content'>
+      <CompanyAlgo/>
       </div>
     </div>
   )
