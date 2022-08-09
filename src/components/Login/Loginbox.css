@@ -14,16 +14,16 @@ body{
     height: 1000px;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 100px) {
     #logo {
-      display: none;
+      min-width: 100px
     }
   }
 
 #signin-form {
     /* background: linear-gradient(rgba(40, 20, 84, 0.728)); */
-    background: rgb(70,65,167);
-    background: rgb(104,91,142);
+    /* background: rgb(70,65,167);
+    background: rgb(104,91,142); */
     background: linear-gradient(302deg, rgba(104,91,142,1) 0%, rgba(40,20,84,0.9094231442577031) 100%);
     padding: 8rem;
     border-radius: 8px;
