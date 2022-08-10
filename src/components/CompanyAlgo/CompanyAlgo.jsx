@@ -1,67 +1,76 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import './CompanyAlgo.css'
-import img from '../../img/Algorhythm-Logo1.png'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './CompanyAlgo.css';
+import img from '../../img/Algorhythm-Logo1.png';
 
+const useInput = (initial) => {
+  const [value, setValue] = useState(initial)
+  const onChange = (e) => {
+    setValue(e.target.value)
+  }
+  return [value, onChange]
+}
 
-export default function CompanyAlgo () {
-    const [company, setCompany] = useState("");
-    const [algo, setAlgo] = useState("");
-    const [language, setLanguage] = useState("");
+export default function CompanyAlgo() {
+  const [company, setCompany] = useInput('');
+  const [question, setQuestion] = useInput('');
+  const [language, setLanguage] = useInput('');
 
-    async function post() {
-        const body = {
-            company: company,
-            algo: algo,
-        };
+  function post(e) {
+    e.preventDefault();
+    const body = {
+      company,
+      question,
+      language,
+    };
 
-        await fetch("http://localhost:3000/home/save", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        })
-          .then((data) => data.json())
-          .then((data) => {
-              console.log("posted");
-            setCompany(data.company);
-            setAlgo(data.algo);
-         })
-          .catch((err) => console.log(err));
-      }
+    fetch('/api/postalgo', {
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((data) => {
+        return data.json()
+      })
+      .then((data) => {
+        console.log('posted', data);
+      })
+      .catch((err) => console.log(err));
+  }
 
-
-    //   const companyList = company.map((elements, index) => {
-    //     return (
-    //       <div>
-    //           <div id="companyNames">{elements.company}
-    //           <div>{elements.algo}</div>
-    //           </div>
-    //         </div>
-    //     );
-    //   });
-
+  // const companyList = company.map((elements, index) => {
+  //   return (
+  //     <div>
+  //         <div id="companyNames">{elements.company}
+  //         <div>{elements.algo}</div>
+  //         </div>
+  //       </div>
+  //   );
+  // });
 
   return (
     <div className='companyAlgoPage'>
-        <img src={img} id='logo'/>
-        <div id='form'>
-            <form onSubmit={()=> {
-                post();
-            }}>
-            <input id='companyBox' placeholder='Company Name'></input>
-            <input id='language' placeholder='Language'></input><br />
-            <input id='algoBox' placeholder='Algorhythm'></input>
-            {/* <input id='creator' placeholder='Algorhythm'></input> */}<br />
-            <button className='button-85' type="submit">New Post</button>
-            </form>
-        </div>
-        <div>
-            <button>Company List Here!</button>
-            {/* {companyList} */}
-        </div>
+      <img id='logo' src={img} alt='logo' />
+      <div id='form'>
+        <form>
+          <input
+            id='companyBox'
+            placeholder='Company Name'
+            onChange={setCompany}
+          />
+          <input id='language' placeholder='Language' onChange={setLanguage} />
+          <input id='algoBox' placeholder='Algorhythm' onChange={setQuestion} />
+          <button className='button-85' type='submit' onClick={post}>
+            New Post
+          </button>
+        </form>
+      </div>
+      <div>
+        <button>Company List Here!</button>
+        {/* {companyList} */}
+      </div>
     </div>
-
-  )
+  );
 }

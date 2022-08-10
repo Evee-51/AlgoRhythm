@@ -1,8 +1,12 @@
-body{
+body {
     background: whitesmoke;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+img {
+    width: 500px;
 }
 
 #login-mainbox{
@@ -11,7 +15,7 @@ body{
     align-items: center;
     justify-content: center;
     width: 800px;
-    height: 1000px;
+    height: 700px;
 }
 
 @media screen and (min-width: 100px) {
@@ -43,7 +47,7 @@ body{
 }
 
 #inputPassword {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     width: 225px;
     padding: 5px 9px;
     font-size: 0.95rem;
@@ -71,7 +75,7 @@ body{
 
 #loginbtn:active {   
     transform: translateY(1px);
-    background: #a021ef;
+    background: #CBCFED;
     color: whitesmoke;
 }
 
@@ -82,18 +86,4 @@ body{
     font-size: 0.95rem;
     font-family: 'Ubuntu', sans-serif;
     text-decoration: none;
-    background-color: #CBCFED;
-    border-color: whitesmoke;
-}
-
-#signuplink:hover {
-    border-color:rgb(255, 255, 255);
-    background: #ABDAD9;
-    color: whitesmoke;
-}
-
-#signuplink:active {   
-    transform: translateY(1px);
-    background: #ABDAD9;
-    color: whitesmoke;
 }

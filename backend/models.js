@@ -93,6 +93,7 @@ models.postUser = function (username, password, first, last) {
 //Verify login
 models.verifyLogin = function (username, password) {
     return new Promise((resolve, reject) => {
+        console.log('Trying to login with: ', {username, password});
         userModel.findOne({username, password}, (err, data) => {
             if(err) {
                 console.log(err);

@@ -8,6 +8,9 @@ const algoController = require('./algoController');
 const userController = require('./userController')
 const { appendFile } = require('fs');
 
+let cors = require("cors");
+app.use(cors());
+
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
@@ -34,12 +37,12 @@ app.get('/api/getalgos/:id', algoController.findAlgo,
   (req, res) => res.status(200).json(res.locals.foundAlgo)
 );  
 
-app.post('/api/login', userController.signup,
+app.post('/api/signup', userController.signup,
   (req, res) => res.status(200).json('Signup complete!')
 );
 
-app.post('/api/signup', userController.verifyUser,
-  (req, res) => res.status(200).json('Login Attempted!')
+app.post('/api/login', userController.verifyUser,
+  (req, res) => res.status(200).json(res.locals.login)
 );
 
 // Global error handler 

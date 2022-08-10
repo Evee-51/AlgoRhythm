@@ -83,6 +83,7 @@ algoController.filterAlgos = (req, res, next) => {
 // Post request to post an algo 
 algoController.postAlgo = (req, res, next) => {
   // Fill later once we have keys defined   
+  console.log(req.body);
   const { company, question, language } = req.body;
   // Fill create method later
   models.postAlgo(company, question, language, 5)

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './Signup.css'
 
 
@@ -16,6 +17,12 @@ export default function SignupBox (props) {
   const [first, firstOnChange] = useInput('')
   const [last, lastOnChange] = useInput('')
 
+
+  const navigate = useNavigate()
+  const navigateToLogin = () => {
+    navigate('http://localhost:3333/')
+  }
+
   const saveUser = (event) => {
     event.preventDefault();
     const body = {
@@ -24,21 +31,17 @@ export default function SignupBox (props) {
       first,
       last
     }
-    console.log('BODY ', body);
-    console.log('Console log AFTER body.');
-
     fetch('http://localhost:3333/api/signup', {
       method: 'POST',
-      mode: 'cors',
       body: JSON.stringify(body),
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Headers': '*'
+        'Content-Type': 'application/json'
       }
     })
       .then((data) => {
-        console.log('RECEIVED DATA: ', data)
+        return data.json()
       })
+      .then((data) => navigateToLogin())
       .catch((error) => console.log('FETCH ERROR: ', error))
   }
 

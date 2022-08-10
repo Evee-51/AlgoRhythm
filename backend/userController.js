@@ -6,6 +6,14 @@ const userController = {};
 userController.signup = (req, res, next) => {  
     console.log('Attempted signup with: ', req.body);
     const {username, password, first, last} = req.body;
+
+    if(username === '' || password === '' || first === '' || last === '') {
+        return next({
+            log: `userController.getAlgos ERROR: Invalid signup information`,
+            message: {err: 'Please make sure all required credentials are filled in.'}
+        });
+    }
+
     models.postUser(username, password, first, last)
     .then(data => {
         console.log('Posted user: ', data);
@@ -25,13 +33,15 @@ userController.verifyUser = (req, res, next) => {
         if(data) {
             console.log('Login verified!');
 
+            res.locals.login = true;
             //Auth logic
 
             next();
         }
         else {
             console.log('Couldn\'t find user with your credentials.');
-
+            
+            res.locals.login = false;
             //Reject login logic
 
             next();
