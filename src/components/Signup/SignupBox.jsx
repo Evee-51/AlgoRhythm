@@ -84,8 +84,9 @@ export default function SignupBox (props) {
             <input id="signupbtn" type='submit' value='Sign Up' onClick={saveUser} />
           </form>
           <div id='text'>
-            <span id ='member'>Already a member?</span>
-            <a href='/' id='backtologin'>Log in</a>
+            <span id ='member'>Already a member?
+              <a id='backtologin' href='/'>Log in</a>
+            </span>
           </div>
         </div>
       </div>

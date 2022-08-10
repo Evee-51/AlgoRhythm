@@ -58,36 +58,41 @@ body{
 
 #signupbtn {
   padding: 6px 98px;
-  border-radius: 5px;
+  border-radius: 10px;
   font-size: 0.95rem;
   font-family: 'Ubuntu', sans-serif;
-  background-color:  #a021ef;
-  border-style: none;
+  background-color:  #ABDAD9;
+  border-color: whitesmoke;
 }
 
 #signupbtn:hover {
   border-color:rgb(255, 255, 255);
-  border-width: 6px;
-  background: #a021ef;
+  background: #8AC7DB;
   color: whitesmoke;
 }
 
 #signupbtn:active {   
   transform: translateY(1px);
-  background: #a021ef;
+  background: #CBCFED;
   color: whitesmoke;
 }
 
 #backtologin {
   text-decoration: none;
   font-family: 'Ubuntu', sans-serif;
-  color:  #cd8df4;
+  color: #a021ef;
   font-size: 0.95em;
   margin-left: 17px;
 }
 
-/* #member {
+#member {
   display: flex;
   align-items: center;
   justify-content: center;
-} */
+}
+
+#backtologin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
