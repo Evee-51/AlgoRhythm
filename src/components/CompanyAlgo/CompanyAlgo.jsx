@@ -23,6 +23,7 @@ export default function CompanyAlgo() {
       company,
       question,
       language,
+ 
     };
 
     // const newCompanyArr = {
@@ -39,6 +40,15 @@ export default function CompanyAlgo() {
       },
     })
       .then((data) => {
+        fetch('/api/getalgos')
+        .then((data) => data.json())
+        .then((content) => {
+          content.sort((a, b) => (a.company > b.company) ? 1 : -1);
+          setAlgos(content);
+        })
+        .catch((err) => {
+          console.log('Got err: ', err);
+        })
         return data.json()
       })
       .then((data) => {
@@ -51,6 +61,7 @@ export default function CompanyAlgo() {
     fetch('/api/getalgos')
       .then((data) => data.json())
       .then((content) => {
+        content.sort((a, b) => (a.company > b.company) ? 1 : -1);
         setAlgos(content);
       })
       .catch((err) => {
@@ -62,7 +73,7 @@ export default function CompanyAlgo() {
   for(let i = 0; i < algos.length; i++) {
     const a = algos[i];
     renderAlgs.push(
-      <div key={'a.company' + i}>
+      <div className='algos' key={'a.company' + i}>
       <div id="companyNames">{a.company + '|' + a.date}
          <div>{a.question}</div>
          <div>{a.language}</div>
@@ -71,16 +82,7 @@ export default function CompanyAlgo() {
     );
   }
 
-  // const companyList = companyArr.map((elements, index) => {
-  //   console.log(elements)
-  //   return (
-  //     <div>
-  //         <div id="companyNames">{elements.company}
-  //         <div>{elements.algo}</div>
-  //         </div>
-  //       </div>
-  //   );
-  // });
+
 
   return (
     <div className='companyAlgoPage'>
@@ -100,9 +102,6 @@ export default function CompanyAlgo() {
         </form>
       </div>
       <div id='company'>
-        {/* <button>Company List Here!</button> */}
-        {/* {temp} */}
-        {/* {companyList} */}
         {renderAlgs}
       </div>
     </div>
