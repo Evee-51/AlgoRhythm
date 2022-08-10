@@ -1,5 +1,5 @@
 body{
-  background: whitesmoke;
+  background-color: rgb(225, 242, 248);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,11 +27,6 @@ body{
   align-items: center;
 }
 
-#logo {
-  margin-right: 120px;
-  width: 250px;
-}
-
 #signup-header{
   font-family: 'Ubuntu', sans-serif;
   font-size: 2rem;
@@ -57,7 +52,8 @@ body{
 }
 
 #signupbtn {
-  padding: 6px 98px;
+  padding: 6px 95px;
+  margin-left: 9px;
   border-radius: 10px;
   font-size: 0.95rem;
   font-family: 'Ubuntu', sans-serif;
@@ -82,7 +78,7 @@ body{
   font-family: 'Ubuntu', sans-serif;
   color: #a021ef;
   font-size: 0.95em;
-  margin-left: 17px;
+  margin-left: 20px;
 }
 
 #member {

@@ -22,7 +22,7 @@ const AlgoSchema = new Schema({
     question: String,
     language: String,
     creator: String,
-    date: {type: Date, default: Date.now()}
+    date: String
 });
 
 const UserSchema = new Schema({
@@ -38,7 +38,11 @@ const userModel = mongoose.model('User', UserSchema);
 //Post algo
 models.postAlgo = function (company, question, language, creator) {
     return new Promise((resolve, reject) => {
-        algoModel.create({company, question, language, creator}, (err, data) => {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        let mm = today.getMonth() + 1;
+        let dd = today.getDate();
+        algoModel.create({company, question, language, creator, date: dd + '/' + mm + '/' + yyyy}, (err, data) => {
             if(err) {
                 console.log(err);
                 reject(err);

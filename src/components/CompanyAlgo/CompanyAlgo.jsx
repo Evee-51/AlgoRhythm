@@ -11,11 +11,39 @@ const useInput = (initial) => {
   return [value, onChange]
 }
 
-export default function CompanyAlgo() {
+export default function CompanyAlgo(props) {
   const [company, setCompany] = useInput('');
   const [question, setQuestion] = useInput('');
   const [language, setLanguage] = useInput('');
   const [algos, setAlgos] = useState([]);
+  const [searchText, setSearchText] = useState('');
+
+  const fetchData = function() {
+      var details = {
+        search: searchText,
+        language: ''
+      };
+
+      console.log('Searching for ', details);
+
+      fetch(`/api/getalgos`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(details)
+      })
+      .then(data => data.json())
+      .then((content) => {
+        console.log('Got search results: ', content);
+        // content.sort();
+        content.sort((a, b) => (a.company.toLowerCase() > b.company.toLowerCase()) ? 1 : -1);
+        setAlgos(content);
+      })
+      .catch((err) => {
+        console.log('Got err: ', err);
+      })
+  }
 
   function post(e) {
     e.preventDefault();
@@ -26,12 +54,6 @@ export default function CompanyAlgo() {
  
     };
 
-    // const newCompanyArr = {
-    //   company: "",
-    //   language: "",
-    //   question: ""
-    // }
-
     fetch('/api/postalgo', {
       method: 'POST',
       body: JSON.stringify(body),
@@ -40,41 +62,40 @@ export default function CompanyAlgo() {
       },
     })
       .then((data) => {
-        fetch('/api/getalgos')
-        .then((data) => data.json())
-        .then((content) => {
-          content.sort((a, b) => (a.company > b.company) ? 1 : -1);
-          setAlgos(content);
-        })
-        .catch((err) => {
-          console.log('Got err: ', err);
-        })
-        return data.json()
-      })
-      .then((data) => {
-        // console.log('data' , data)
+        fetchData();
+        document.getElementById('language').value = '';
+        document.getElementById('algoBox').value = '';
+        document.getElementById('companyBox').value = '';
       })
       .catch((err) => console.log(err));
   }
 
   useEffect(() => {
-    fetch('/api/getalgos')
-      .then((data) => data.json())
-      .then((content) => {
-        content.sort((a, b) => (a.company > b.company) ? 1 : -1);
-        setAlgos(content);
-      })
-      .catch((err) => {
-        console.log('Got err: ', err);
-      })
+    fetchData();
   }, []);
 
-  const renderAlgs = [];
+  const shownAlgos = [];
   for(let i = 0; i < algos.length; i++) {
     const a = algos[i];
+    const question = a.question.toLowerCase().replace(' ', '');
+    const company = a.company.toLowerCase().replace(' ', '');
+    const language = a.language.toLowerCase().replace(' ', '');
+    const text = searchText.toLowerCase().replace(' ', '');
+    
+    console.log('Searching: ', text);
+
+    if(question.includes(text) || company.includes(text) || language.includes(text)) {
+      shownAlgos.push(a);
+    }
+  }
+  const renderAlgs = [];
+  for(let i = 0; i < shownAlgos.length; i++) {
+    const a = shownAlgos[i];
+
     renderAlgs.push(
       <div className='algos' key={'a.company' + i}>
-      <div id="companyNames">{a.company + '|' + a.date}
+      <div id="companyNames">{a.company}
+         <div>{a.date}</div>
          <div>{a.question}</div>
          <div>{a.language}</div>
        </div>
@@ -82,13 +103,26 @@ export default function CompanyAlgo() {
     );
   }
 
-
-
   return (
     <div className='companyAlgoPage'>
       <img id='logo' src={img} alt='logo' />
+
       <div id='form'>
         <form>
+        <div>
+        <form id='searchBar' role="search">
+            <label htmlFor="search">Search for stuff</label>
+            <input id="searchbox" type="search" placeholder="Search..." autoFocus required />
+            <button className='button-86' type="button" onClick={e => {
+              e.preventDefault();
+              const text = document.getElementById('searchbox').value;
+              console.log('Search text is now: ', text);
+              setSearchText(text);
+            }}>
+              Go
+            </button>    
+        </form> 
+        </div>
           <input
             id='companyBox'
             placeholder='Company Name'
@@ -101,7 +135,13 @@ export default function CompanyAlgo() {
           </button>
         </form>
       </div>
-      <div id='company'>
+      <div className='company'>
+        <div id='columns'>
+          <div>Company</div>
+          <div>Date</div>
+          <div>Question</div>
+          <div>Language</div>
+        </div>
         {renderAlgs}
       </div>
     </div>

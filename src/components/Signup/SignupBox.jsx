@@ -20,8 +20,8 @@ export default function SignupBox (props) {
 
   const navigate = useNavigate()
   const navigateToLogin = () => {
-    navigate('http://localhost:3333/')
-  }
+    navigate('/');
+  };
 
   const saveUser = (event) => {
     event.preventDefault();
@@ -39,9 +39,12 @@ export default function SignupBox (props) {
       }
     })
       .then((data) => {
-        return data.json()
+        return data.json();
       })
-      .then((data) => navigateToLogin())
+      .then((data) => {
+          console.log('SIGNUP DATA: ', data);
+          if(data) navigateToLogin();
+      })
       .catch((error) => console.log('FETCH ERROR: ', error))
   }
 
@@ -81,7 +84,7 @@ export default function SignupBox (props) {
               id="signupinput"
               className= 'inputfield'
             /><br/>
-            <input id="signupbtn" type='submit' value='Sign Up' onClick={saveUser} />
+            <button id="signupbtn" onClick={saveUser}>Sign Up</button>
           </form>
           <div id='text'>
             <span id ='member'>Already a member?

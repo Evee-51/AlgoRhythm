@@ -4,11 +4,9 @@ const algoController = {};
 
 // Get request for all algo problems 
 algoController.getAlgos = (req, res, next) => {  
-    console.log('Urlencoded body: ', req.query);
     models.getAlgoSet()
     .then(data => {
         res.locals.allAlgos = data;
-        console.log('Got algo: ', data);
         next();
     })
     .catch(err => {
@@ -25,7 +23,7 @@ algoController.filterAlgos = (req, res, next) => {
     const filteredAlgos = [];
 
     //Remove spaces and casing for searching
-    let {search, language} = req.query;
+    let {search, language} = req.body;
 
     //If search and language are either undefined or empty...
     if((search === undefined || search === '') && (language === undefined || language === '')) {
@@ -34,8 +32,8 @@ algoController.filterAlgos = (req, res, next) => {
         return next();
     }
 
-    search = search.toLowerCase().replace(' ', '');
-    language = language.toLowerCase().replace(' ', '');
+    search = search.toLowerCase().replace('_', '').replace(' ', '');
+    language = language.toLowerCase().replace('_', '').replace(' ', '');
 
     let keywords = [];
     if(search.includes(',')) {

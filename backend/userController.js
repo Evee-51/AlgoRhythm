@@ -17,6 +17,7 @@ userController.signup = (req, res, next) => {
     models.postUser(username, password, first, last)
     .then(data => {
         console.log('Posted user: ', data);
+        next();
     })
     .catch(err => {
         next({

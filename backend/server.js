@@ -12,7 +12,6 @@ let cors = require("cors");
 app.use(cors());
 
 app.use(express.json());
-app.use(express.urlencoded({extended:false}));
 
 // const algoRouter = express.Router();
 // app.use('/algos', algoRouter);
@@ -25,7 +24,7 @@ app.use('/bundle.js', express.static('../dist/bundle.js'));
 
 // app.get('/server_getalgos', (req, res) => res.status(200).send('HELLO'));
 
-app.get('/api/getalgos', algoController.getAlgos, algoController.filterAlgos,
+app.post('/api/getalgos', algoController.getAlgos, algoController.filterAlgos,
   (req, res) => res.status(200).json(res.locals.filteredAlgos)
 );
 

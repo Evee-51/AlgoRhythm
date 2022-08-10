@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import SearchBar from '../../components/SearchBar/SearchBar.jsx'
 import CompanyAlgo from '../../components/CompanyAlgo/CompanyAlgo.jsx'
@@ -10,11 +10,10 @@ export default function Homepage () {
   //   return state.app.applications
   // })
   // console.log(applications)
+  
+
   return (
-    <div id='home'>
-      <div>
-        {/* <SearchBar/> */}
-      </div>
+    <div id='searchBar'>
       <div id='content'>
       <CompanyAlgo/>
       </div>
